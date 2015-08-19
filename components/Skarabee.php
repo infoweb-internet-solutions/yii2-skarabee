@@ -252,7 +252,7 @@ class Skarabee extends \yii\base\Component
         // Define result method which contains the results
         $resultMethod = $method . 'Result';
         $result = $this->soapClient->$method($parameters)->$resultMethod;
-        mail('fabio@infoweb.be', __FILE__.' => '.__LINE__, var_export($result,true));
+
         return json_decode(json_encode($result), true);
     }  
 }
