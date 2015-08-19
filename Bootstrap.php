@@ -1,5 +1,5 @@
 <?php
-namespace infoweb\social;
+namespace infoweb\skarabee;
 
 use Yii;
 use yii\base\BootstrapInterface;
