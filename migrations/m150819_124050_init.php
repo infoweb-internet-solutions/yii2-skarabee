@@ -1,6 +1,7 @@
 <?php
 
 use yii\db\Migration;
+use yii\db\Schema;
 
 class m150819_124050_init extends Migration
 {
@@ -78,13 +79,16 @@ class m150819_124050_init extends Migration
             'real_estate_tax'                       => Schema::TYPE_DECIMAL . '(14,4) UNSIGNED NOT NULL DEFAULT 0',
             'enabled'                               => Schema::TYPE_BOOLEAN . ' UNSIGNED NOT NULL DEFAULT 0',
             'active'                                => Schema::TYPE_BOOLEAN . ' UNSIGNED NOT NULL DEFAULT 0',
+            'created_at'                            => Schema::TYPE_BOOLEAN . ' UNSIGNED NOT NULL DEFAULT 0',
+            'updated_at'                            => Schema::TYPE_BOOLEAN . ' UNSIGNED NOT NULL DEFAULT 0',
+            'disabled_at'                           => Schema::TYPE_BOOLEAN . ' UNSIGNED NOT NULL DEFAULT 0',
 
         ], $tableOptions);
         
         $this->createIndex('property_id', '{{%real_estates}}', 'property_id');
         
         $this->createTable('{{%skarabee}}', [
-            'last_synchronisation' => => Schema::TYPE_INTEGER . ' UNSIGNED NOT NULL',
+            'last_synchronisation' => Schema::TYPE_INTEGER . ' UNSIGNED NOT NULL',
         ]);
     }
 
