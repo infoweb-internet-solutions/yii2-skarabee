@@ -1,0 +1,32 @@
+{
+  "name": "infoweb-internet-solutions/yii2-skarabee",
+  "description": "Skarabee module for Yii2",
+  "keywords": [
+    "yii2",
+    "yii2-skarabee",
+    "skarabee",
+    "infoweb"
+  ],
+  "type": "yii2-extension",
+  "license": "MIT",
+  "support": {
+    "issues": "https://github.com/infoweb-internet-solutions/yii2-skarabee/issues?state=open",
+    "source": "https://github.com/infoweb-internet-solutions/yii2-skarabee"
+  },
+  "authors": [
+    {
+      "name": "Fabio Maggio",
+      "email": "fabiomaggio@gmail.com",
+      "homepage": "https://github.com/fabiomaggio"
+    }
+  ],
+  "require": {
+    "yiisoft/yii2": "@stable"
+  },
+  "autoload": {
+    "psr-4": {
+      "infoweb\\skarabee\\": ""
+    }
+  }
+}
+        
