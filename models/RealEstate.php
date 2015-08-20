@@ -35,14 +35,6 @@ class RealEstate extends ActiveRecord
             ],
         ]);
     }
-
-    /**
-     * @inheritdoc
-     */
-    public function attributeLabels()
-    {
-        return [];
-    }
     
     /**
      * Deletes the attached images
