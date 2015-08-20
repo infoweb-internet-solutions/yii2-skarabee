@@ -41,10 +41,6 @@ class SkarabeeController extends Controller
             
             foreach ($publications as $publication) {
                 
-                // Process only 5 publications for testing
-                if ($stats['processedPublications'] >= 1)
-                    continue;
-                
                 // Add the id to the sent publications array
                 $stats['sentPublications'][] = $publication['ID'];
                 
