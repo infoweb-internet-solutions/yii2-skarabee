@@ -21,7 +21,8 @@
     }
   ],
   "require": {
-    "yiisoft/yii2": "@stable"
+    "yiisoft/yii2": "@stable",
+    "infoweb-internet-solutions/yii2-cms": "*"
   },
   "autoload": {
     "psr-4": {

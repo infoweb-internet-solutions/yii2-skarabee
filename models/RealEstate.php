@@ -29,6 +29,9 @@ class RealEstate extends ActiveRecord
                 ],
                 'value' => function() { return time(); },
             ],
+            'image' => [
+                'class' => 'infoweb\cms\behaviors\ImageBehave',
+            ],
         ]);
     }
 
