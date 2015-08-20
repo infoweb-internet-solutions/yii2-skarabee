@@ -24,7 +24,13 @@ to the require section of your `composer.json` file.
 Usage
 -----
 
-Once the extension is installed, simply modify your application configuration as follows:
+Once the extension is installed run this migration
+
+```bash
+yii migrate/up --migrationPath=@infoweb/skarabee/migrations
+```
+
+Enable the module in `common\config\main.php` as follows:
 
 ```php
 'modules' => [
@@ -35,11 +41,24 @@ Once the extension is installed, simply modify your application configuration as
 ],
 ```
 
-Import the translations and use category 'infoweb/skarabee':
+And configure the component in `common\config\main.php`:
+```php
+'components' => [
+	...
+    'skarabee' => [
+    	'class' => 'infoweb\skarabee\components\Skarabee',
+        'userName' => XXXXXX,
+        'password' => XXXXXX
+    ]
+]
 ```
+
+Import the translations and use category 'infoweb/skarabee':
+```bash
 yii i18n/import @infoweb/skarabee/messages
 ```
 
-To use the module, execute yii migration
+You can import real estates from **Skarabee** into your database from the command line with the following command:
+```bash
+yii skarabee/import
 ```
-yii migrate/up --migrationPath=@vendor/infoweb-internet-solutions/yii2-skarabee/migrations
