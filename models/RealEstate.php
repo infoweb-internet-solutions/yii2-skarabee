@@ -61,6 +61,23 @@ class RealEstate extends ActiveRecord
         ];
     }
     
+    /**
+     * Because Skarabee uses multiple types to point to the same type of estate, theses shortcuts are defined
+     * 
+     * @return  array
+     */
+    public function combinedTypes()
+    {
+        return [
+            'house' => ['HFH', 'FRH', 'CLH'],
+            'appartment' => [],
+            'garage' => [],
+            'commercialBuilding' => [],
+            'office' => [],
+            'parking' => []
+        ]    
+    }
+    
     public function types()
     {
         return [
