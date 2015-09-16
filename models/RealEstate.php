@@ -75,7 +75,7 @@ class RealEstate extends ActiveRecord
             'commercialBuilding' => [],
             'office' => [],
             'parking' => []
-        ]    
+        ];    
     }
     
     public function types()
