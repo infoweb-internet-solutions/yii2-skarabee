@@ -12,6 +12,8 @@ class RealEstateSearch extends RealEstateModel
     public $pageSize;
     public $route;
 
+    //public $city;
+
     /**
      * Creates data provider instance with search query applied
      * @return ActiveDataProvider
@@ -30,7 +32,7 @@ class RealEstateSearch extends RealEstateModel
             ],
         ]);
 
-        if (!($this->load($params) && !$this->validate())) {
+        if (!($this->load($params) && $this->validate())) {
             // uncomment the following line if you do not want to return any records when validation fails
             // $query->where('0=1');
             return $dataProvider;
