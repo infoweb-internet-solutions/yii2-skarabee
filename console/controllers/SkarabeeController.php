@@ -34,7 +34,7 @@ class SkarabeeController extends Controller
             
             // Load the publications
             $publications = Yii::$app->skarabee->getAll();
-            $stats['publicationsCount'] = count($publications);
+            $stats['publicationsCount'] = count($publications);          
             
             // Start progress bar
             Console::startProgress(0, $stats['publicationsCount'], 'Importing: ', false);
@@ -79,7 +79,16 @@ class SkarabeeController extends Controller
                     $estate->conditional_sold = $item['Property']['ConditionalSold'];
                     $estate->area = $item['Property']['Area'];
                     $estate->land_area = $item['Property']['LandArea'];
-                    $estate->heating_type = (isset($item['Property']['HeatingTypes']) && isset($item['Property']['HeatingTypes']['HeatingType'])) ? $item['Property']['HeatingTypes']['HeatingType'] : '';
+                    if (isset($item['Property']['HeatingTypes']) && isset($item['Property']['HeatingTypes']['HeatingType'])) {
+                        
+                        if (is_array($item['Property']['HeatingTypes']['HeatingType'])) {
+                            $estate->heating_type = $item['Property']['HeatingTypes']['HeatingType'][0];
+                        } else {
+                            $estate->heating_type = $item['Property']['HeatingTypes']['HeatingType'];
+                        }
+                    } else if (isset($item['Property']['HeatingTypes'])) {
+                        $estate->heating_type = '';    
+                    }                    
                     $estate->restriction_comment = (isset($item['Property']['RestrictionComment'])) ? $item['Property']['RestrictionComment'] : '';
                     $estate->communal_expenses = $item['Property']['CommunalExpenses'];
                     $estate->floor_level = (isset($item['Property']['FloorLevelNL'])) ? $item['Property']['FloorLevelNL'] : '';
