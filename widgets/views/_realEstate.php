@@ -13,7 +13,7 @@ use yii\helpers\Html;
 
 <div class="info">
     <div class="price">
-        €<?= $model->price ?>
+        &euro;<?= $model->price ?>
     </div>
     <div class="type">
         <?= $model->type ?>

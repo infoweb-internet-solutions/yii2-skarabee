@@ -22,10 +22,11 @@ class RealEstate extends Widget
      */
     public function run()
     {
-        $searchModel = new Search([
+        $searchModel = new RealEstateSearch([
             'pageSize' => $this->pageSize,
             'route' => $this->route,
         ]);
+
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('realEstate', ['dataProvider' => $dataProvider, 'template' => $this->template, 'layout' => $this->layout]);
