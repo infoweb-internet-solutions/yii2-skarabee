@@ -48,7 +48,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'status',
                 'label' => Yii::t('infoweb/skarabee', 'Status'),
                 'value' => function ($model, $index, $widget) {
-                    return $model->statusses()[$model->status];    
+                    return $model->statuses()[$model->status];
                 }
             ]
         ],

@@ -11,6 +11,7 @@ class RealEstate extends Widget
     public $pageSize = 20;
     public $layout = "{summary}{items}\n{pager}";
     public $route = '';
+    public $defaultValues = [];
 
     public function init()
     {
@@ -26,6 +27,10 @@ class RealEstate extends Widget
             'pageSize' => $this->pageSize,
             'route' => $this->route,
         ]);
+
+        foreach ($this->defaultValues as $key => $value) {
+            $searchModel->{$key} = $value;
+        }
 
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 

@@ -7,26 +7,31 @@ use yii\widgets\ActiveForm;
     <h1><?= Yii::t('frontend' ,'Zoek in ons aanbod') ?></h1>
 
     <?php $form = ActiveForm::begin([
-        'id' => 'w0-filters',
-        //'action' => Url::toRoute('site/search'),
+        'id' => 'search-form',
+        'action' => \yii\helpers\Url::toRoute(['/zoeken']),
         'method' => 'get',
     ]); ?>
-
-    <?= $form->field($model, 'street') ?>
 
     <?php // Flash messages ?>
     <?= Yii::$app->view->render('@app/views/site/_flash_messages'); ?>
 
-    <?= $form->field($model, 'status')->dropDownList([
-        'FOR_SALE' => 'Te koop',
-        'FOR_RENT' => 'Te huur',
-    ], [
-        'prompt' => $model->getAttributeLabel('type')
-    ])->label(false) ?>
+    <div class="form-group">
+        <?= Html::dropDownList('realEstateCategory', Yii::$app->request->get('realEstateCategory', null),
+            \yii\helpers\ArrayHelper::map(\infoweb\skarabee\models\Category::find()->all(), 'id', 'name'), [
+            'prompt' => Yii::t('frontend', 'Kies een status'),
+            'class' => 'form-control',
+        ]) ?>
+    </div>
 
     <?= $form->field($model, 'city')->textInput(['placeholder' => $model->getAttributeLabel('city')])->label(false) ?>
 
-    <?= $form->field($model, 'market_type')->textInput(['placeholder' => $model->getAttributeLabel('market_type')])->label(false) ?>
+    <div class="form-group">
+        <?= Html::dropDownList('realEstateType', Yii::$app->request->get('realEstateType', null),
+            \yii\helpers\ArrayHelper::map(\infoweb\skarabee\models\Type::find()->all(), 'id', 'name'), [
+                'prompt' => Yii::t('frontend', 'Kies een type'),
+                'class' => 'form-control',
+            ]) ?>
+    </div>
 
     <?php /*
             <div class="row">

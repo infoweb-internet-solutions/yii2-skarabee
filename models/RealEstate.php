@@ -47,7 +47,7 @@ class RealEstate extends ActiveRecord
         ]);
     }
     
-    public function statusses()
+    public static function statuses()
     {
         return [
             self::STATUS_SOLD => Yii::t('infoweb/skarabee', 'Verkocht'),
@@ -60,25 +60,39 @@ class RealEstate extends ActiveRecord
             self::STATUS_PROSPECT_FOR_RENT => Yii::t('infoweb/skarabee', 'Te huur'),
         ];
     }
-    
+
+    /**
+     * Because Skarabee uses multiple statuses to point to the same type of estate, theses shortcuts are defined
+     *
+     * @return  array
+     */
+    public static function combinedStatuses()
+    {
+        return [
+            'te-huur' => [self::STATUS_RENTED, self::STATUS_FOR_RENT, self::STATUS_FOR_RENT_ORDER_ENDED, self::STATUS_PROSPECT_FOR_RENT],
+            'te-koop' => [self::STATUS_SOLD, self::STATUS_FOR_SALE, self::STATUS_FOR_SALE_ORDER_ENDED, self::STATUS_PROSPECT_FOR_SALE],
+        ];
+    }
+
     /**
      * Because Skarabee uses multiple types to point to the same type of estate, theses shortcuts are defined
      * 
      * @return  array
      */
-    public function combinedTypes()
+    public static function combinedTypes()
     {
         return [
-            'house' => ['HFH', 'FRH', 'CLH'],
-            'appartment' => [],
-            'garage' => [],
-            'commercialBuilding' => [],
-            'office' => [],
-            'parking' => []
+            'appartement' => ['APP'],
+            'autostaanplaats' => ['PAR'],
+            'garage' => ['GAR'],
+            'grond' => ['BGH', 'BGO', 'BUT'],
+            'handelspand' => ['STO', 'CAT', 'OTH'],
+            'kantoor' => ['OFF'],
+            'woonhuis' => ['HFH', 'FRH', 'CLH'],
         ];    
     }
     
-    public function types()
+    public static function types()
     {
         return [
             'APP'           => Yii::t('infoweb/skarabee', 'Appartement'),

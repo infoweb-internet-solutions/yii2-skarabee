@@ -2,14 +2,14 @@
 use yii\helpers\Html;
 ?>
 <div class="foto">
-    <?= Html::a(Html::img($model->getImage()->getUrl('250x'), ['class' => 'img-responsive center-block']), $model->getImageByIdentifier('main', true, Yii::getAlias('@frontendUrl/img/avatar.png'))->getUrl('1000x'), ['class' => 'fancybox', 'rel' => 'group']) ?>
+    <?= Html::a(Html::img($model->getImage()->getUrl('320x208'), ['class' => 'img-responsive center-block']), $model->getImage()->getUrl('1000x'), ['class' => 'fancybox', 'rel' => "real-estate-{$model->id}"]) ?>
 </div>
 <div class="thumbs">
     <div class="thumb1">
-        <?= Html::img('@web/frontend/web/img/tekoop/foto2.jpg') ?>
+        <?= Html::a(Html::img($model->getImage()->getUrl('150x96'), ['class' => 'img-responsive center-block']), $model->getImage()->getUrl('1000x'), ['class' => 'fancybox', 'rel' => "real-estate-{$model->id}"]) ?>
     </div>
     <div class="thumb2">
-        <?= Html::img('@web/frontend/web/img/tekoop/foto3.jpg') ?>
+        <?= Html::a(Html::img($model->getImage()->getUrl('150x96'), ['class' => 'img-responsive center-block']), $model->getImage()->getUrl('1000x'), ['class' => 'fancybox', 'rel' => "real-estate-{$model->id}"]) ?>
     </div>
 </div>
 
@@ -18,7 +18,7 @@ use yii\helpers\Html;
         &euro;<?= $model->price ?>
     </div>
     <div class="type">
-        <?= $model->type ?>
+        <?= \infoweb\skarabee\models\RealEstate::types()[$model->type] ?>
     </div>
     <div class="location">
         <?= $model->zipcode ?>&nbsp;<?= $model->city ?>
