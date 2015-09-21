@@ -3,6 +3,7 @@
 namespace infoweb\skarabee\widgets;
 
 use Yii;
+use yii\base\Model;
 use yii\data\ActiveDataProvider;
 
 use infoweb\skarabee\models\RealEstate as RealEstateModel;
@@ -12,7 +13,23 @@ class RealEstateSearch extends RealEstateModel
     public $pageSize;
     public $route;
 
-    //public $city;
+    public function rules()
+    {
+        return [
+            [['id', 'property_id', 'construction_year', 'area', 'land_area', 'number_of_floors', 'number_of_bedrooms', 'number_of_bathrooms', 'number_of_parking_places', 'number_of_offices', 'enabled', 'active', 'created_at', 'updated_at', 'disabled_at', 'created_in_skarabee_at', 'updated_in_skarabee_at'], 'integer'],
+            [['street', 'house_number', 'house_number_extension', 'mailbox', 'zipcode', 'city', 'market_type', 'type', 'status', 'typo_characterisation', 'price_type', 'reference', 'flash_title', 'flash_text', 'conditional_sold', 'heating_type', 'restriction_comment', 'floor_level', 'available_from', 'has_garage', 'has_terrace', 'has_garden', 'has_elevator', 'new_estate', 'special_type', 'urban_development_permit', 'urban_development_summons', 'urban_development_preemptive_rights', 'urban_development_allotment_permit', 'urban_development_area_application', 'urban_development_judicial_decision', 'energy_class_end_date', 'energy_class', 'energy_certificate_nr', 'orientation', 'nearby_public_transport', 'nearby_shops', 'nearby_school', 'nearby_highway', 'address_position_x', 'address_position_y', 'renovation_year'], 'safe'],
+            [['price', 'cadastrall_income', 'communal_expenses', 'surface_living', 'surface_garden', 'surface_kitchen', 'surface_livable', 'energy_index', 'real_estate_tax'], 'number'],
+        ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function scenarios()
+    {
+        // bypass scenarios() implementation in the parent class
+        return Model::scenarios();
+    }
 
     /**
      * Creates data provider instance with search query applied
