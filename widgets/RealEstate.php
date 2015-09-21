@@ -9,7 +9,7 @@ class RealEstate extends Widget
 {
     public $template = '_realEstate';
     public $pageSize = 20;
-    public $layout = "{items}\n{pager}";
+    public $layout = "{summary}{items}\n{pager}";
     public $route = '';
 
     public function init()

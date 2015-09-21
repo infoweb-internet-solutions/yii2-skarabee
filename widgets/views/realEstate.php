@@ -17,7 +17,6 @@ echo \yii\widgets\ListView::widget([
     'viewParams' => [
 
     ],
-    'summary' => false,
     'itemOptions' => [
         'class' => 'tekoop-item',
     ],

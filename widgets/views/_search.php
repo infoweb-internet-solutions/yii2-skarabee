@@ -17,7 +17,12 @@ use yii\widgets\ActiveForm;
     <?php // Flash messages ?>
     <?= Yii::$app->view->render('@app/views/site/_flash_messages'); ?>
 
-    <?= $form->field($model, 'type')->textInput(['placeholder' => $model->getAttributeLabel('type')])->label(false) ?>
+    <?= $form->field($model, 'status')->dropDownList([
+        'FOR_SALE' => 'Te koop',
+        'FOR_RENT' => 'Te huur',
+    ], [
+        'prompt' => $model->getAttributeLabel('type')
+    ])->label(false) ?>
 
     <?= $form->field($model, 'city')->textInput(['placeholder' => $model->getAttributeLabel('city')])->label(false) ?>
 
@@ -35,6 +40,7 @@ use yii\widgets\ActiveForm;
             */ ?>
     <div class="form-group">
         <?= Html::submitButton(Yii::t('frontend', 'Zoeken'), ['class' => 'btn btn-danger']) ?>
+        <?php /* <?= Html::resetButton(Yii::t('frontend', 'Reset'), ['class' => 'btn btn-default']) ?> */ ?>
     </div>
 
     <?php ActiveForm::end(); ?>
