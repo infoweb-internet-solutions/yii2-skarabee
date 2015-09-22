@@ -9,18 +9,20 @@ Pjax::begin([
     'timeout' => 5000,
 ]);
 
-echo $this->render('_search', ['model' => $searchModel]);
+echo $this->render('_search', ['model' => $searchModel, 'searchOnly' => $searchOnly]);
 
-echo \yii\widgets\ListView::widget([
-    'dataProvider' => $dataProvider,
-    'itemView' => $template,
-    'viewParams' => [
+if (!$searchOnly) {
+    echo \yii\widgets\ListView::widget([
+        'dataProvider' => $dataProvider,
+        'itemView' => $template,
+        'viewParams' => [
 
-    ],
-    'itemOptions' => [
-        'class' => 'tekoop-item',
-    ],
-    'layout' => $layout,
-]);
+        ],
+        'itemOptions' => [
+            'class' => 'tekoop-item',
+        ],
+        'layout' => $layout,
+    ]);
+}
 
 Pjax::end();

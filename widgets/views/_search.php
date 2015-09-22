@@ -10,7 +10,7 @@ use yii\widgets\ActiveForm;
         'id' => 'search-form',
         'action' => \yii\helpers\Url::toRoute(['/zoeken']),
         'method' => 'get',
-        'options' => ['data-pjax' => true ],
+        'options' => ['data-pjax' => ($searchOnly) ? false : true],
     ]); ?>
 
     <?php // Flash messages ?>
@@ -21,6 +21,7 @@ use yii\widgets\ActiveForm;
             \yii\helpers\ArrayHelper::map(\infoweb\skarabee\models\Category::find()->all(), 'id', 'name'), [
             'prompt' => Yii::t('frontend', 'Kies een status'),
             'class' => 'form-control',
+            'id' => 'real-estate-category',
         ]) ?>
     </div>
 
@@ -34,28 +35,34 @@ use yii\widgets\ActiveForm;
             ]) ?>
     </div>
 
-    <div class="row">
+    <div class="prices-sale row">
         <div class="col-sm-6">
             <?= $form->field($model, 'minPrice')->dropDownList(Yii::$app->params['minPricesForSale'], [
-                'prompt' => Yii::t('frontend', 'Prijs van')
+                'prompt' => Yii::t('frontend', 'Prijs van'),
+                'encode' => false,
                 ])->label(false) ?>
         </div>
         <div class="col-sm-6">
             <?= $form->field($model, 'maxPrice')->dropDownList(Yii::$app->params['maxPricesForSale'], [
-                'prompt' => Yii::t('frontend', 'Prijs tot')
+                'prompt' => Yii::t('frontend', 'Prijs tot'),
+                'encode' => false,
                 ])->label(false) ?>
         </div>
     </div>
 
-    <div class="row hidden">
+    <div class="prices-rent row hidden">
         <div class="col-sm-6">
             <?= $form->field($model, 'minPrice')->dropDownList(Yii::$app->params['minPricesForRent'], [
-                'prompt' => Yii::t('frontend', 'Prijs van')
+                'prompt' => Yii::t('frontend', 'Prijs van'),
+                'disabled' => true,
+                'encode' => false,
             ])->label(false) ?>
         </div>
         <div class="col-sm-6">
             <?= $form->field($model, 'maxPrice')->dropDownList(Yii::$app->params['maxPricesForRent'], [
-                'prompt' => Yii::t('frontend', 'Prijs tot')
+                'prompt' => Yii::t('frontend', 'Prijs tot'),
+                'disabled' => true,
+                'encode' => false,
             ])->label(false) ?>
         </div>
     </div>

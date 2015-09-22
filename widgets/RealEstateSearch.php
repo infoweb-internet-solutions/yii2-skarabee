@@ -15,11 +15,16 @@ class RealEstateSearch extends RealEstateModel
     public $minPrice;
     public $maxPrice;
 
+    public function formName()
+    {
+        return '';
+    }
+
     public function rules()
     {
         return [
             [['minPrice', 'maxPrice'], 'integer'],
-            [['city', 'type', 'status'], 'safe'],
+            [['city'], 'safe'],
         ];
     }
 
@@ -89,8 +94,6 @@ class RealEstateSearch extends RealEstateModel
         if ($this->minPrice) {
             $query->andFilterWhere(['<', 'price', $this->maxPrice]);
         }
-
-        mail('ruben@infoweb.be', __FILE__ . ' => ' . __LINE__, $query->createCommand()->rawSql);
 
         return $dataProvider;
     }
