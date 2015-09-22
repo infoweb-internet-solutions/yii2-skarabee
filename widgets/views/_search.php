@@ -67,9 +67,10 @@ use yii\widgets\ActiveForm;
         </div>
     </div>
 
-    <div class="form-group">
-        <?= Html::submitButton(Yii::t('frontend', 'Zoeken'), ['class' => 'btn btn-danger']) ?>
-        <?php /* <?= Html::resetButton(Yii::t('frontend', 'Reset'), ['class' => 'btn btn-default']) ?> */ ?>
+    <div class="row form-group">
+        <div class="col-sm-offset-6 col-sm-6">
+            <?= Html::submitButton(Yii::t('frontend', 'Zoeken'), ['class' => 'btn btn-danger form-control']) ?>
+        </div>
     </div>
 
     <?php ActiveForm::end(); ?>
