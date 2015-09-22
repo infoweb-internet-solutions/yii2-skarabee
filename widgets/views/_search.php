@@ -10,6 +10,7 @@ use yii\widgets\ActiveForm;
         'id' => 'search-form',
         'action' => \yii\helpers\Url::toRoute(['/zoeken']),
         'method' => 'get',
+        'options' => ['data-pjax' => true ],
     ]); ?>
 
     <?php // Flash messages ?>
@@ -33,16 +34,32 @@ use yii\widgets\ActiveForm;
             ]) ?>
     </div>
 
-    <?php /*
-            <div class="row">
-                <div class="col-sm-6">
-                    <?= $form->field($model, 'price_from')->textInput(['placeholder' => $model->getAttributeLabel('price_from')])->label(false) ?>
-                </div>
-                <div class="col-sm-6">
-                    <?= $form->field($model, 'price_to')->textInput(['placeholder' => $model->getAttributeLabel('price_to')])->label(false) ?>
-                </div>
-            </div>
-            */ ?>
+    <div class="row">
+        <div class="col-sm-6">
+            <?= $form->field($model, 'minPrice')->dropDownList(Yii::$app->params['minPricesForSale'], [
+                'prompt' => Yii::t('frontend', 'Prijs van')
+                ])->label(false) ?>
+        </div>
+        <div class="col-sm-6">
+            <?= $form->field($model, 'maxPrice')->dropDownList(Yii::$app->params['maxPricesForSale'], [
+                'prompt' => Yii::t('frontend', 'Prijs tot')
+                ])->label(false) ?>
+        </div>
+    </div>
+
+    <div class="row hidden">
+        <div class="col-sm-6">
+            <?= $form->field($model, 'minPrice')->dropDownList(Yii::$app->params['minPricesForRent'], [
+                'prompt' => Yii::t('frontend', 'Prijs van')
+            ])->label(false) ?>
+        </div>
+        <div class="col-sm-6">
+            <?= $form->field($model, 'maxPrice')->dropDownList(Yii::$app->params['maxPricesForRent'], [
+                'prompt' => Yii::t('frontend', 'Prijs tot')
+            ])->label(false) ?>
+        </div>
+    </div>
+
     <div class="form-group">
         <?= Html::submitButton(Yii::t('frontend', 'Zoeken'), ['class' => 'btn btn-danger']) ?>
         <?php /* <?= Html::resetButton(Yii::t('frontend', 'Reset'), ['class' => 'btn btn-default']) ?> */ ?>

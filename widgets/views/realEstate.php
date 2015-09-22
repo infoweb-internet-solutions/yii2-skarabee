@@ -6,7 +6,7 @@ use yii\widgets\Pjax;
 
 Pjax::begin([
     'id' => 'real-estate-items',
-    'timeout' => 3000,
+    'timeout' => 5000,
 ]);
 
 echo $this->render('_search', ['model' => $searchModel]);

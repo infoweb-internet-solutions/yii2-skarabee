@@ -12,12 +12,24 @@ class RealEstateSearch extends RealEstateModel
 {
     public $pageSize;
     public $route;
+    public $minPrice;
+    public $maxPrice;
 
     public function rules()
     {
         return [
-            [['price'], 'integer'],
-            [['city'], 'safe'],
+            [['minPrice', 'maxPrice'], 'integer'],
+            [['city', 'type', 'status'], 'safe'],
+        ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function attributeLabels()
+    {
+        return [
+            'city' => Yii::t('frontend', 'Gemeente'),
         ];
     }
 
@@ -69,6 +81,16 @@ class RealEstateSearch extends RealEstateModel
         }
 
         $query->andFilterWhere(['like', 'city', $this->city]);
+
+        if ($this->minPrice) {
+            $query->andFilterWhere(['>', 'price', $this->minPrice]);
+        }
+
+        if ($this->minPrice) {
+            $query->andFilterWhere(['<', 'price', $this->maxPrice]);
+        }
+
+        mail('ruben@infoweb.be', __FILE__ . ' => ' . __LINE__, $query->createCommand()->rawSql);
 
         return $dataProvider;
     }
