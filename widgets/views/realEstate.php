@@ -13,6 +13,8 @@ echo $this->render('_search', ['model' => $searchModel, 'searchOnly' => $searchO
 
 if (!$searchOnly) {
     echo \yii\widgets\ListView::widget([
+        'id' => 'real-estates',
+        'options' => ['class' => 'list-view pull-left'],
         'dataProvider' => $dataProvider,
         'itemView' => $template,
         'viewParams' => [
