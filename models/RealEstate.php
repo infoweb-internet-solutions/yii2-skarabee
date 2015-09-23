@@ -20,8 +20,7 @@ class RealEstate extends ActiveRecord
     const STATUS_FOR_RENT = 'FOR_RENT';
     const STATUS_FOR_RENT_ORDER_ENDED = 'FOR_RENT_ORDER_ENDED';
     const STATUS_PROSPECT_FOR_RENT = 'PROSPECT_FOR_RENT';
-    
-    
+
     /**
      * @inheritdoc
      */
@@ -165,7 +164,23 @@ class RealEstate extends ActiveRecord
         
         return $address;
     }
-    
+
+    /**
+     * Returns the price
+     *
+     * @return string
+     * @throws \yii\base\InvalidConfigException
+     */
+    public function getFullPrice() {
+        $price = Yii::$app->formatter->asCurrency($this->price);
+
+        if (in_array($this->status, self::combinedStatuses()['te-huur'])) {
+            $price .= ' / maand';
+        }
+
+        return $price;
+    }
+
     /**
      * Returns the full address
      * 

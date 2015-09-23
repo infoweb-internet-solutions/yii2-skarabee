@@ -1,6 +1,5 @@
 <?php
 use yii\helpers\Html;
-use infoweb\skarabee\models\RealEstate;
 ?>
 <?php if ($model->getImage(false)): ?>
 <div class="foto" >
@@ -25,9 +24,9 @@ use infoweb\skarabee\models\RealEstate;
 </div>
 <?php endif; ?>
 <div class="info">
-    <?php if ($model->price): ?>
+    <?php if ($model->fullPrice): ?>
     <div class="price">
-        <?= Yii::$app->formatter->asCurrency($model->price) ?> <?= (in_array($model->status, RealEstate::combinedStatuses()['te-huur'])) ? ' / maand' : '' ?>
+        <?= $model->fullPrice ?>
     </div>
     <?php endif; ?>
     <?php if ($model->type): ?>
@@ -47,5 +46,5 @@ use infoweb\skarabee\models\RealEstate;
     <?php endif; ?>
 </div>
 <div class="button">
-    <?= Html::a('Meer info', 'vastgoed/' . $model->id, ['class' => 'btn button-detail']) ?>
+    <?= Html::a('Meer info', 'vastgoed/' . $model->id, ['class' => 'btn button-detail', 'data-pjax' => 0]) ?>
 </div>
