@@ -36,7 +36,7 @@ use yii\helpers\Html;
     <?php endif; ?>
     <?php if ($model->city): ?>
     <div class="location">
-        <?= $model->zipcode ?>&nbsp;<?= $model->city ?>
+        <?= $model->zipcode ?>&nbsp;<?= $model->city ?><span class="small"><?= $model->address ?></span>
     </div>
     <?php endif; ?>
     <?php if ($model->flash_title): ?>

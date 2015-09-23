@@ -182,6 +182,16 @@ class RealEstate extends ActiveRecord
     }
 
     /**
+     * Returns the surface
+     *
+     * @param $property
+     * @return string
+     */
+    public function getSurface($property) {
+        return Yii::$app->formatter->asDecimal($this->{$property}, 0) . '&nbsp;m<sup>2</sup>';
+    }
+
+    /**
      * Returns the full address
      * 
      * @return  string
@@ -193,6 +203,20 @@ class RealEstate extends ActiveRecord
         $address .= ", {$this->zipcode} {$this->city}";
         
         return $address;
+    }
+
+    /**
+     * Returns available from
+     *
+     * @return mixed
+     */
+    public function getAvailableFrom() {
+
+        if (strpos($this->available_from, '20') == 0) {
+            $this->available_from = Yii::$app->formatter->asDate($this->available_from);
+        }
+
+        return $this->available_from;
     }
     
     /**
