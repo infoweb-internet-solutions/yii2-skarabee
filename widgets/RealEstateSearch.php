@@ -66,7 +66,7 @@ class RealEstateSearch extends RealEstateModel
         ]);
 
         // Default values hack
-        $get = Yii::$app->request->get($this->formName());
+        $get = Yii::$app->request->get();
         if ($get && !($this->load($params) && $this->validate())) {
             // uncomment the following line if you do not want to return any records when validation fails
             // $query->where('0=1');
