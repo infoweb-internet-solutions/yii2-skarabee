@@ -14,6 +14,10 @@ use infoweb\skarabee\models\RealEstate;
     </div>
     <?php endif; ?>
     <?php endforeach; ?>
+    <?php /* Hack if here are only 2 images */ ?>
+    <?php if (count($model->getImages(['isMain' => 0])) < 2): ?>
+    <div class="thumb1">&nbsp;</div>
+    <?php endif; ?>
 </div>
 <?php else: ?>
 <div class="foto" style="width: 486px;">
