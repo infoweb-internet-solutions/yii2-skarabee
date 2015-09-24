@@ -60,6 +60,28 @@ class RealEstate extends ActiveRecord
         ];
     }
 
+    public static function getUrbanDevelopmentAreaApplications() {
+        return [
+            'Ag'        => 'Agrarisch gebied',
+            'Bg'        => 'Bosgebied',
+            'Gdr'       => 'Dagrecreatie',
+            'Gvr'       => 'Verblijfrecreatie',
+            'Iab'       => 'Industriegebied voor ambachtelijke bedrijven of gebieden voor kleine en middelgrote ondernemingen',
+            'Igb'       => 'Industriegebied',
+            'Lwag'      => 'Landschappelijk waardevolle agrarisch gebied',
+            'Ng'        => 'Natuurgebied',
+            'Nr'        => 'Natuurreservaat',
+            'OTHER'     => 'Andere',
+            'Pg'        => 'Landelijk parkgebied',
+            'UNDEFINED' => 'Nee',
+            'Wche'      => 'Woongebied met culturele, historische en/of esthetische waarde',
+            'Wg'        => 'Woongebied',
+            'Wglk'      => 'Woongebied met landelijk karakter',
+            'Wp'        => 'Woonpark',
+            'Wug'       => 'Woonuitbreidingsgebied'
+        ];
+    }
+
     /**
      * Because Skarabee uses multiple statuses to point to the same type of estate, theses shortcuts are defined
      *
