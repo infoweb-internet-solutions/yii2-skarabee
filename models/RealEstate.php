@@ -227,9 +227,6 @@ class RealEstate extends ActiveRecord
     public function getUrl()
     {
         $url = (Yii::$app->id !== 'app-backend') ? Yii::getAlias('@baseUrl') . '/' : '';
-        
-        if ($includeLanguage)
-            $url .= (($this->language == null) ? Yii::$app->language : $this->language) . '/';
 
         if (Yii::$app->hasModule('skarabee')) {
             $module = Yii::$app->getModule('skarabee');
