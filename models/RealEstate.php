@@ -43,6 +43,9 @@ class RealEstate extends ActiveRecord
             'image' => [
                 'class' => 'infoweb\cms\behaviors\ImageBehave',
             ],
+            'pdf' => [
+                'class' => 'infoweb\cms\behaviors\PdfBehave'
+            ],
         ]);
     }
 

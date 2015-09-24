@@ -6,7 +6,7 @@ use yii\helpers\Html;
     <?= Html::a(Html::img($model->getImage(false)->getUrl('320x208'), ['class' => 'img-responsive center-block']), $model->getImage(false)->getUrl('1000x'), ['class' => 'fancybox', 'rel' => "real-estate-{$model->id}"]) ?>
 </div>
 <div class="thumbs">
-    <?php foreach ($model->getImages(['isMain' => 0]) as $key => $image): ?>
+    <?php foreach ($model->getImages(['isMain' => 0], true, ['position' => SORT_ASC]) as $key => $image): ?>
     <?php if ($key < 2): ?>
     <div class="thumb1">
         <?= Html::a(Html::img($image->getUrl('150x96'), ['class' => 'img-responsive center-block']), $image->getUrl('1000x'), ['class' => 'fancybox', 'rel' => "real-estate-{$model->id}"]) ?>
