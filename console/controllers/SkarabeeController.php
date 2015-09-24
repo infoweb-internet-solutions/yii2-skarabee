@@ -49,10 +49,13 @@ class SkarabeeController extends Controller
                 
                 // Try to load the real estate from the database
                 $estate = RealEstate::findOne($item['Info']['ID']);
+                $isNew = false;
                 
                 // Initialize a new real estate if none was found in the database
-                if (!$estate)
+                if (!$estate) {
                     $estate = new RealEstate;
+                    $isNew = true;
+                }
                 
                 // The 'Info' attribute must be set
                 if (isset($item['Info'])) {
@@ -162,7 +165,13 @@ class SkarabeeController extends Controller
                             }    
                         }
                     }
-      
+                          
+                    if ($isNew) {
+                        $stats['createdPublications']++;    
+                    } else {
+                        $stats['updatedPublications']++;    
+                    }
+                    
                     $stats['importedPublications']++;
                 }
     
@@ -199,6 +208,10 @@ class SkarabeeController extends Controller
             Yii::info("{$stats['createdPublications']} real estates were created", 'skarabee');
             Yii::info("{$stats['updatedPublications']} real estates were updated", 'skarabee');
             Yii::info("{$stats['deletedPublications']} real estates were deleted", 'skarabee');
+            
+            // Update skarabee db table
+            Yii::$app->db->createCommand('TRUNCATE TABLE `skarabee`')->execute();
+            Yii::$app->db->createCommand('INSERT INTO `skarabee`(`last_synchronisation`) VALUES(UNIX_TIMESTAMP())')->execute();
             
             return Controller::EXIT_CODE_NORMAL;    
         } catch (\Exception $e) {

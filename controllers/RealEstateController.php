@@ -23,10 +23,12 @@ class RealEstateController extends Controller
     {
         $searchModel = new RealEstateSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $timestamp = Yii::$app->db->createCommand('SELECT `last_synchronisation` FROM `skarabee`')->queryOne();
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'timestamp' => $timestamp
         ]);
     }
 }
