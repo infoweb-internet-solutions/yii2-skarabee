@@ -46,5 +46,5 @@ use yii\helpers\Html;
     <?php endif; ?>
 </div>
 <div class="button">
-    <?= Html::a('Meer info', 'vastgoed/' . $model->id, ['class' => 'btn button-detail', 'data-pjax' => 0]) ?>
+    <?= Html::a('Meer info', $model->getUrl(), ['class' => 'btn button-detail', 'data-pjax' => 0]) ?>
 </div>
