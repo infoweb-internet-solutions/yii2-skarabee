@@ -109,7 +109,86 @@ class RealEstate extends ActiveRecord
             'BUT'           => Yii::t('infoweb/skarabee', 'Grond'),
         ];
     }
-    
+
+    /**
+     * Orientations
+     */
+    public static function getOrientations () {
+        return [
+            'NORTH'         => Yii::t('infoweb/skarabee', 'Noord'),
+            'NORTH_EAST'    => Yii::t('infoweb/skarabee', 'Noord-Oost'),
+            'NORTH_WEST'    => Yii::t('infoweb/skarabee', 'Noord-West'),
+            'EAST'          => Yii::t('infoweb/skarabee', 'Oost'),'Oost',
+            'WEST'          => Yii::t('infoweb/skarabee', 'West'),'West',
+            'SOUTH'         => Yii::t('infoweb/skarabee', 'Zuid'),'Zuid',
+            'SOUTH_EAST'    => Yii::t('infoweb/skarabee', 'Zuid-Oost'),
+            'SOUTH_WEST'    => Yii::t('infoweb/skarabee', 'Zuid-West'),
+            'UNDEFINED'     => '-',
+        ];
+    }
+
+    public static function getHeatingTypes () {
+        return [
+            'ELECTRICITY'           => Yii::t('infoweb/skarabee', 'Electrisch'),
+            'HEATING_OIL'           => Yii::t('infoweb/skarabee', 'Stookolie'),
+            'NATURAL_GAS'           => Yii::t('infoweb/skarabee', 'Gas'),
+            'INDIVIDUAL'            => Yii::t('infoweb/skarabee', 'Individueel'),
+            'CENTRALLY_HEATED'      => Yii::t('infoweb/skarabee', 'Centrale verwarming'),
+            'OTHER'                 => Yii::t('infoweb/skarabee', 'Andere'),
+        ];
+    }
+
+    public static function getTypoCharacterisations() {
+        return [
+            'Dwelling_Corner'               => Yii::t('infoweb/skarabee', 'Hoekwoning'),
+            'Dwelling_Detached'             => Yii::t('infoweb/skarabee', 'Open bebouwing'),
+            'Dwelling_Linked'               => Yii::t('infoweb/skarabee', 'Schakelwoning'),
+            'Dwelling_Quadrant'             => Yii::t('infoweb/skarabee', 'Kwadrantwoning'),
+            'Dwelling_SemiDetached'         => Yii::t('infoweb/skarabee', 'Half open bebouwing'),
+            'Dwelling_Terraced'             => Yii::t('infoweb/skarabee', 'Rijwoning'),
+
+            'Flat_Corridor'                 => Yii::t('infoweb/skarabee', 'Corridorflat'),
+            'Flat_Gallery'                  => Yii::t('infoweb/skarabee', 'Galerij'),
+            'Flat_Highrise'                 => Yii::t('infoweb/skarabee', 'Hoogbouw'),
+            'Flat_Porch'                    => Yii::t('infoweb/skarabee', 'Portiekflat'),
+            'Flat_Condominium'              => Yii::t('infoweb/skarabee', 'Condominium'),
+            'Flat_Villa'                    => Yii::t('infoweb/skarabee', 'Villa-appartement'),
+            'Flat_Townhouse'                => Yii::t('infoweb/skarabee', 'In stadswoning'),
+            'Flat_Haussmann'                => Yii::t('infoweb/skarabee', 'Architecture haussmannienne'),
+
+            'Land_Corner'                   => Yii::t('infoweb/skarabee', 'Hoekwoning'),
+            'Land_Detached'                 => Yii::t('infoweb/skarabee', 'Open bebouwing'),
+            'Land_Linked'                   => Yii::t('infoweb/skarabee', 'Schakelwoning'),
+            'Land_SemiDetached'             => Yii::t('infoweb/skarabee', 'Half open bebouwing'),
+            'Land_Terraced'                 => Yii::t('infoweb/skarabee', 'Rijwoning'),
+
+            'ServiceFlat_Corridor'          => Yii::t('infoweb/skarabee', 'Corridorflat'),
+            'ServiceFlat_Gallery'           => Yii::t('infoweb/skarabee', 'Galerij'),
+            'ServiceFlat_Highrise'          => Yii::t('infoweb/skarabee', 'Hoogbouw'),
+            'ServiceFlat_Porch'             => Yii::t('infoweb/skarabee', 'Portiekflat'),
+            'ServiceFlat_Condominium'       => Yii::t('infoweb/skarabee', 'Condominium'),
+            'ServiceFlat_Villa'             => Yii::t('infoweb/skarabee', 'Villa-appartement'),
+            'ServiceFlat_Townhouse'         => Yii::t('infoweb/skarabee', 'In stadswoning'),
+            'ServiceFlat_Haussmann'         => Yii::t('infoweb/skarabee', 'Architecture haussmannienne'),
+
+            'Room_InComplex'                => Yii::t('infoweb/skarabee', 'In complex-kamergebouw'),
+            'Room_InDwelling'               => Yii::t('infoweb/skarabee', 'In woonhuis'),
+            'Room_InFlat'                   => Yii::t('infoweb/skarabee', 'In appartement'),
+            'Room_Townhouse'                => Yii::t('infoweb/skarabee', 'In stadswoning'),
+
+            'Parking_Annex'                 => Yii::t('infoweb/skarabee', 'Aangebouwd'),
+            'Parking_Inbuilt'               => Yii::t('infoweb/skarabee', 'Inpandig'),
+            'Parking_Detached'              => Yii::t('infoweb/skarabee', 'Vrijstaand'),
+
+            'Other_Corner'                  => Yii::t('infoweb/skarabee', 'Hoekwoning'),
+            'Other_Detached'                => Yii::t('infoweb/skarabee', 'Open bebouwing'),
+            'Other_Linked'                  => Yii::t('infoweb/skarabee', 'Schakelwoning'),
+            'Other_Quadrant'                => Yii::t('infoweb/skarabee', 'Kwadrantwoning'),
+            'Other_SemiDetached'            => Yii::t('infoweb/skarabee', 'Half open bebouwing'),
+            'Other_Terraced'                => Yii::t('infoweb/skarabee', 'Rijwoning'),
+        ];
+    }
+
     /**
      * Deletes the attached images
      * 
@@ -188,7 +267,22 @@ class RealEstate extends ActiveRecord
      * @return string
      */
     public function getSurface($property) {
+
+        if (!isset($this->{$property}) || $this->{$property} == 0) {
+            return '-';
+        }
+
         return Yii::$app->formatter->asDecimal($this->{$property}, 0) . '&nbsp;m<sup>2</sup>';
+    }
+
+    /**
+     * Convert database boolean to string
+     *
+     * @param $property
+     * @return string
+     */
+    public function getBoolean($property) {
+        return (isset($this->{$property}) && $this->{$property} === 'TRUE') ? 'Ja' : 'Nee';
     }
 
     /**
@@ -212,13 +306,17 @@ class RealEstate extends ActiveRecord
      */
     public function getAvailableFrom() {
 
-        if (strpos($this->available_from, '20') == 0) {
+        if (!isset($this->available_from)) {
+            return '-';
+        }
+
+        if (strpos($this->available_from, '20') !== false) {
             $this->available_from = Yii::$app->formatter->asDate($this->available_from);
         }
 
         return $this->available_from;
     }
-    
+
     /**
      * Downloads an image from the Skarabee server
      * 
