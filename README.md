@@ -62,3 +62,10 @@ You can import real estates from **Skarabee** into your database from the comman
 ```bash
 yii skarabee/import
 ```
+Configuration
+-------------
+All available configuration options are listed below with their default values.
+___
+##### realEstateUrlPrefix (type: `string`, default: )
+The value of this option will be used in the `getUrl` method of the `infoweb\Skarabee\models\RealEstate` model. It serves as the prefix in the url structure and is a translation key in the `url` **i18n** category.
+___

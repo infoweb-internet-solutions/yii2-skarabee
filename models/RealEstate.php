@@ -318,6 +318,28 @@ class RealEstate extends ActiveRecord
     }
 
     /**
+     * Returns the url of the real-estate
+     *
+     * @return  string  $url
+     */
+    public function getUrl()
+    {
+        $url = (Yii::$app->id !== 'app-backend') ? Yii::getAlias('@baseUrl') . '/' : '';
+
+        if (Yii::$app->hasModule('skarabee')) {
+            $module = Yii::$app->getModule('skarabee');
+    
+            if ($module->realEstateUrlPrefix) {
+                $url .= Yii::t('url', $module->realEstateUrlPrefix) . '/';
+            }
+        }
+
+        $url .= "{$this->id}";
+
+        return $url;
+    }
+    
+    /**
      * Downloads an image from the Skarabee server
      * 
      * @param   string  $url    The image url
