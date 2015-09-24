@@ -45,6 +45,16 @@ class RealEstate extends ActiveRecord
             ],
         ]);
     }
+
+    /**
+     * @inheritdoc
+     */
+    public function rules()
+    {
+        return [
+            [['downloads'], 'string'],
+        ];
+    }
     
     public static function statuses()
     {

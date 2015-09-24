@@ -55,7 +55,21 @@ $this->params['breadcrumbs'][] = $this->title;
                 'value' => function ($model, $index, $widget) {
                     return $model->statuses()[$model->status];
                 }
-            ]
+            ],
+            [
+                'class' => 'kartik\grid\ActionColumn',
+                'template' => '{downloads}',
+                'buttons' => [
+                    'downloads' => function ($url, $model) {
+                        return Html::a('<span class="glyphicon glyphicon-th-list"></span>', $url, [
+                            'title' => Yii::t('infoweb/skarabee', 'Downloads'),
+                            'data-pjax' => '0',
+                            'data-toggle' => 'tooltip',
+                        ]);
+                    },
+                ],
+                'width' => '80px',
+            ],
         ],
         'responsive' => true,
         'floatHeader' => true,
