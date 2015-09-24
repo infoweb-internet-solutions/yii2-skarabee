@@ -24,11 +24,13 @@ $this->params['breadcrumbs'][] = $this->title;
         'filterModel' => $searchModel,
         'columns' => [
             [
+                'class' => 'kartik\grid\DataColumn',
                 'attribute' => 'street',
                 'label' => Yii::t('infoweb/skarabee', 'Adres'),
                 'value' => function ($model, $index, $widget) {
-                    return $model->getAddress();    
-                }
+                    return Html::a($model->getAddress(), $model->getUrl(), ['target' => '_blank', 'data-pjax' => 0]);    
+                },
+                'format' => 'raw'
             ],
             [
                 'attribute' => 'zipcode',
