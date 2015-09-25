@@ -9,7 +9,7 @@ Pjax::begin([
     'timeout' => 5000,
 ]);
 
-echo $this->render('_search', ['model' => $searchModel, 'searchOnly' => $searchOnly]);
+echo $this->render($searchLayout, ['model' => $searchModel, 'searchOnly' => $searchOnly]);
 
 if (!$searchOnly) {
     echo \yii\widgets\ListView::widget([

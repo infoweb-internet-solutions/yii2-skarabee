@@ -13,6 +13,7 @@ class RealEstate extends Widget
     public $route = '';
     public $defaultValues = [];
     public $searchOnly = false;
+    public $searchLayout = '_search';
 
     public function init()
     {
@@ -35,6 +36,13 @@ class RealEstate extends Widget
 
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-        return $this->render('realEstate', ['searchModel' => $searchModel, 'dataProvider' => $dataProvider, 'template' => $this->template, 'layout' => $this->layout, 'searchOnly' => $this->searchOnly]);
+        return $this->render('realEstate', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+            'template' => $this->template,
+            'layout' => $this->layout,
+            'searchOnly' => $this->searchOnly,
+            'searchLayout' => $this->searchLayout,
+        ]);
     }
 }
