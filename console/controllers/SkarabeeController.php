@@ -73,6 +73,7 @@ class SkarabeeController extends Controller
                     $estate->type = $item['Property']['Type'];
                     $estate->status = $item['Property']['Status'];
                     $estate->typo_characterisation = (isset($item['Property']['Typo'])) ? $item['Property']['Typo']['Characterisation'] : '';
+                    $estate->hide_price = (isset($item['Info']['HidePrice']) && $item['Info']['HidePrice'] == true) ? 1 : 0;
                     $estate->price = $item['Property']['Price'];
                     $estate->price_type = $item['Property']['PriceType'];
                     $estate->reference = (isset($item['Property']['Reference'])) ? $item['Property']['Reference'] : '';
@@ -135,7 +136,6 @@ class SkarabeeController extends Controller
                     $estate->real_estate_tax = $item['Property']['RealEstateTax'];
                     $estate->created_in_skarabee_at = (isset($item['Info']['Created'])) ? strtotime($item['Info']['Created']) : 0;
                     $estate->updated_in_skarabee_at = (isset($item['Info']['Modified'])) ? strtotime($item['Info']['Modified']) : 0;
-                    $estate->hide_price = (isset($item['Info']['HidePrice']) && $item['Info']['HidePrice'] == true) ? 1 : 0;
 
                     if (!$estate->save())
                         throw new \Exception("Error while saving publication #{$item['Property']['ID']}");

@@ -89,10 +89,12 @@ class RealEstateSearch extends RealEstateModel
 
         if ($this->minPrice) {
             $query->andFilterWhere(['>', 'price', $this->minPrice]);
+            $query->andFilterWhere(['hide_price' => 0]);
         }
 
         if ($this->maxPrice) {
             $query->andFilterWhere(['<', 'price', $this->maxPrice]);
+            $query->andFilterWhere(['hide_price' => 0]);
         }
 
         return $dataProvider;

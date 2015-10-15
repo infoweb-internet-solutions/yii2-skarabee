@@ -286,6 +286,10 @@ class RealEstate extends ActiveRecord
      * @throws \yii\base\InvalidConfigException
      */
     public function getFullPrice() {
+        if ($this->hide_price == 1) {
+            return Yii::t('infoweb/skarabee', 'Prijs op aanvraag');
+        }
+
         $price = Yii::$app->formatter->asCurrency($this->price);
 
         if (in_array($this->status, self::combinedStatuses()['te-huur'])) {
