@@ -15,9 +15,9 @@ class SkarabeeController extends Controller
 {
     /**
      * Imports publications from Skarabee into the database
-     * 
+     *
      * @return  int
-     */   
+     */
     public function actionImport()
     {
         try {
@@ -31,35 +31,35 @@ class SkarabeeController extends Controller
                 'deletedPublications'   => 0,
                 'sentPublications'      => []
             ];
-            
+
             // Load the publications
             $publications = Yii::$app->skarabee->getAll();
-            $stats['publicationsCount'] = count($publications);          
-            
+            $stats['publicationsCount'] = count($publications);
+
             // Start progress bar
             Console::startProgress(0, $stats['publicationsCount'], 'Importing: ', false);
-            
+
             foreach ($publications as $publication) {
-                
+
                 // Add the id to the sent publications array
                 $stats['sentPublications'][] = $publication['ID'];
-                
+
                 // Get the publication details
                 $item = Yii::$app->skarabee->get($publication['ID']);
-                
+
                 // Try to load the real estate from the database
                 $estate = RealEstate::findOne($item['Info']['ID']);
                 $isNew = false;
-                
+
                 // Initialize a new real estate if none was found in the database
                 if (!$estate) {
                     $estate = new RealEstate;
                     $isNew = true;
                 }
-                
+
                 // The 'Info' attribute must be set
                 if (isset($item['Info'])) {
-    
+
                     // Set real estate attributes and save
                     $estate->id = $item['Info']['ID'];
                     $estate->property_id = $item['Property']['ID'];
@@ -74,6 +74,7 @@ class SkarabeeController extends Controller
                     $estate->status = $item['Property']['Status'];
                     $estate->typo_characterisation = (isset($item['Property']['Typo'])) ? $item['Property']['Typo']['Characterisation'] : '';
                     $estate->price = $item['Property']['Price'];
+                    $estate->price_type = $item['Property']['PriceType'];
                     $estate->reference = (isset($item['Property']['Reference'])) ? $item['Property']['Reference'] : '';
                     $estate->construction_year = $item['Property']['ConstructionYear'];
                     $estate->cadastrall_income = $item['Property']['CadastrallIncome'];
@@ -83,15 +84,15 @@ class SkarabeeController extends Controller
                     $estate->area = $item['Property']['Area'];
                     $estate->land_area = $item['Property']['LandArea'];
                     if (isset($item['Property']['HeatingTypes']) && isset($item['Property']['HeatingTypes']['HeatingType'])) {
-                        
+
                         if (is_array($item['Property']['HeatingTypes']['HeatingType'])) {
                             $estate->heating_type = $item['Property']['HeatingTypes']['HeatingType'][0];
                         } else {
                             $estate->heating_type = $item['Property']['HeatingTypes']['HeatingType'];
                         }
                     } else if (isset($item['Property']['HeatingTypes'])) {
-                        $estate->heating_type = '';    
-                    }                    
+                        $estate->heating_type = '';
+                    }
                     $estate->restriction_comment = (isset($item['Property']['RestrictionComment'])) ? $item['Property']['RestrictionComment'] : '';
                     $estate->communal_expenses = $item['Property']['CommunalExpenses'];
                     $estate->floor_level = (isset($item['Property']['FloorLevelNL'])) ? $item['Property']['FloorLevelNL'] : '';
@@ -134,65 +135,66 @@ class SkarabeeController extends Controller
                     $estate->real_estate_tax = $item['Property']['RealEstateTax'];
                     $estate->created_in_skarabee_at = (isset($item['Info']['Created'])) ? strtotime($item['Info']['Created']) : 0;
                     $estate->updated_in_skarabee_at = (isset($item['Info']['Modified'])) ? strtotime($item['Info']['Modified']) : 0;
-                    
+                    $estate->hide_price = (isset($item['Info']['HidePrice']) && $item['Info']['HidePrice'] == true) ? 1 : 0;
+
                     if (!$estate->save())
                         throw new \Exception("Error while saving publication #{$item['Property']['ID']}");
-                    
+
                     // Only import pictures for publications that are enabled
-                    if ((int) $item['Info']['Enabled'] == 1) {           
+                    if ((int) $item['Info']['Enabled'] == 1) {
                         // Pictures are provided
                         if (isset($item['Pictures']) && isset($item['Pictures']['Picture'])) {
-                            
+
                             // Remove the current images
                             $estate->removeImages();
-                            
+
                             // There is only one picture provided
                             if (is_array($item['Pictures']['Picture']) && isset($item['Pictures']['Picture']['Index'])) {
-    
+
                                 $picture = $item['Pictures']['Picture'];
-                                
+
                                 if (!$estate->attachSkarabeeImage($picture, true))
                                     throw new \Exception("Error while saving image #{$item['Pictures']['Picture']['Index']} of publication #{$item['Property']['ID']}");
-                                
-                            // Multiple pictures are provided        
+
+                            // Multiple pictures are provided
                             } else {
-    
+
                                 // Add the pictures
                                 foreach ($item['Pictures']['Picture'] as $k => $picture) {
                                     if (!$estate->attachSkarabeeImage($picture, ($k == 0) ? true : false))
                                         throw new \Exception("Error while saving image #{$k} of publication #{$item['Property']['ID']}");
-                                }    
-                            }    
+                                }
+                            }
                         }
                     }
-                          
+
                     if ($isNew) {
-                        $stats['createdPublications']++;    
+                        $stats['createdPublications']++;
                     } else {
-                        $stats['updatedPublications']++;    
+                        $stats['updatedPublications']++;
                     }
-                    
+
                     $stats['importedPublications']++;
                 }
-    
+
                 $stats['processedPublications']++;
-                
+
                 // Update progress bar
-                Console::updateProgress($stats['processedPublications'], $stats['publicationsCount']);                 
+                Console::updateProgress($stats['processedPublications'], $stats['publicationsCount']);
             }
-    
+
             Console::endProgress();
-            
+
             // Delete publications that are no longer sent
             $estates = RealEstate::find()->all();
-            
+
             foreach ($estates as $estate) {
                 if (!in_array($estate->id, $stats['sentPublications'])) {
                     $estate->delete();
                     $stats['deletedPublications']++;
                 }
-            }       
-    
+            }
+
             // Display info
             $imported = $this->ansiFormat($stats['importedPublications'], Console::FG_GREEN);
             $created = $this->ansiFormat($stats['createdPublications'], Console::FG_YELLOW);
@@ -202,22 +204,22 @@ class SkarabeeController extends Controller
             $this->stdout("{$created} real estates were created".PHP_EOL);
             $this->stdout("{$updated} real estates were updated".PHP_EOL);
             $this->stdout("{$deleted} real estates were deleted".PHP_EOL);
-            
+
             // Log info
             Yii::info("{$stats['importedPublications']} real estates were imported", 'skarabee');
             Yii::info("{$stats['createdPublications']} real estates were created", 'skarabee');
             Yii::info("{$stats['updatedPublications']} real estates were updated", 'skarabee');
             Yii::info("{$stats['deletedPublications']} real estates were deleted", 'skarabee');
-            
+
             // Update skarabee db table
             Yii::$app->db->createCommand('TRUNCATE TABLE `skarabee`')->execute();
             Yii::$app->db->createCommand('INSERT INTO `skarabee`(`last_synchronisation`) VALUES(UNIX_TIMESTAMP())')->execute();
-            
-            return Controller::EXIT_CODE_NORMAL;    
+
+            return Controller::EXIT_CODE_NORMAL;
         } catch (\Exception $e) {
             $msg = $this->ansiFormat($e->getMessage(), Console::FG_RED, Console::BOLD);
             Yii::error($e->getMessage(), 'skarabee');
-            return Controller::EXIT_CODE_ERROR;    
+            return Controller::EXIT_CODE_ERROR;
         }
-    }  
+    }
 }
