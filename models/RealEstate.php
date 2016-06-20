@@ -131,6 +131,7 @@ class RealEstate extends ActiveRecord
         return [
             'APP'           => Yii::t('infoweb/skarabee', 'Appartement'),
             'HFH'           => Yii::t('infoweb/skarabee', 'Woonhuis'),
+            'AND'           => Yii::t('infoweb/skarabee', 'Woonhuis'),
             'FRH'           => Yii::t('infoweb/skarabee', 'Woonhuis'),
             'CLH'           => Yii::t('infoweb/skarabee', 'Woonhuis'),
             'AND'           => Yii::t('infoweb/skarabee', 'Studentenkamer'),
